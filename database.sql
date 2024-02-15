@@ -14,3 +14,5 @@ VALUES ('Apples', 3, 'lbs'),
 ('Milk', 1, 'gallon'),
 ('Sliced Almonds', 2, 'cups'),
 ('Bananas', 1, 'bunch') ;
+
+ORDER BY "name" ASC;
