@@ -1,39 +1,70 @@
 import {useEffect, useState} from 'react';
+import axios from 'axios';
 
 import Header from '../Header/Header.jsx'
-// import ShoppingList from '../ShoppingList/ShoppingList.jsx'
 
 import './App.css';
 
 
 function App() {
 
-    const [shoppingList, setShoppingList] = useState [''];
+    const [shoppingList, setShoppingList] = useState ([]);
+    const [newItemName, setNewItemName] = useState ('');
+    const [newQuantity, setNewQuantity] = useState ('');
+    const [newUnit, setNewUnit] = useState ('');
+
 
     const fetchShoppingList = () => {
         axios.get('/api/shopping')
           .then(response => {
-            console.log(response.data);
-            shoppingList=response.data;
+            console.log('GET request was successful:', response.data);
             setShoppingList(response.data);
           })
           .catch(err => {
-            alert('error getting shopping list');
-            console.log(err);
+            console.log('GET error in getting shopping list', err);
           })
       }
       //on load, get list
       useEffect(
         fetchShoppingList, []
       );
-     
+
+      const addItem = () => {
+        //post route to add new item to list
+        axios ({
+            method: 'POST',
+            url: '/api/shopping',
+            data: {name: newItemName, quantity: newQuantity, unit: newUnit}
+        })
+            .then(response => {
+                console.log('Item added; POST was successful!', response);
+                fetchShoppingList();
+            })
+            .catch(err => {
+                console.log('Error with POST route.', err);
+            })
+    }
 
 
     return (
         <div className="App">
             <Header />
             <main>
-                <p>Under Construction...</p>
+            <form onSubmit={addItem}>
+                <label htmlFor="item-input">Item:</label>
+                <input id="item-input" value={newItemName} onChange={e => setNewItemName(e.target.value)} />
+                <label htmlFor="qty-input">Quantity:</label>
+                <input id="qty-input" value={newQuantity} onChange={e => setNewQuantity(e.target.value)} />
+                <label htmlFor="unit-input">Unit:</label>
+                <input id="unit-input" value={newUnit} onChange={e => setNewUnit(e.target.value)} />
+                <button type="submit">Save</button>
+            </form>
+            <ul>
+            {shoppingList.map(item => (
+                <li key={item.id}>{item.name}  {item.quantity}  {item.unit} 
+                <button>Buy</button> <button>Remove</button></li> 
+            ))}
+            </ul>
             </main>
             {/* <ShoppingList /> */}
         </div>

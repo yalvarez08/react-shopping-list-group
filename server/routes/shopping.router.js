@@ -6,7 +6,7 @@ const pool = require('../modules/pool.js');
 //GET Route
 router.get('/', (req, res) => {
     console.log("In GET request");
-    let queryText = 'SELECT * from "fs_react_shopping"';
+    let queryText = `SELECT * from "fs_react_shopping"`;
 
     pool.query(queryText).then((result) => {
         res.send(result.rows);
@@ -19,8 +19,8 @@ router.get('/', (req, res) => {
 //POST Route
 router.post('/', (req, res) => {
     console.log('POST req.body', req.body);
-    let queryText = 'INSERT INTO "fs_react_shopping" ("name", "quantity", "unit") VALUES ($1, $2, $3);'
-    pool.query(queryText, [req.body.name, req.body.role])
+    let queryText = `INSERT INTO "fs_react_shopping" ("name", "quantity", "unit") VALUES ($1, $2, $3);`;
+    pool.query(queryText, [req.body.name, req.body.quantity, req.body.unit])
     .then((result) => {
         res.sendStatus(200);
     }).catch((err) => {
