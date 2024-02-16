@@ -5,7 +5,8 @@ CREATE TABLE fs_react_shopping (
 	"id" SERIAL PRIMARY KEY,
 	"name" varchar(80) NOT NULL,
 	"quantity" decimal(4, 2) NOT NULL,
-    "unit" varchar(20)
+    "unit" varchar(20),
+	"is_purchased" BOOLEAN DEFAULT FALSE
 );
 
 INSERT INTO fs_react_shopping ("name", "quantity", "unit")
