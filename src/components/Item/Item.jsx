@@ -1,5 +1,12 @@
 
+
 function Item(props) {
+   
+    // const handleRemove = (event) => {
+    //     event.preventDefault();
+    //     removeItem(props.id)
+
+    // }
 
     return (
         <li> {props.name}  {props.quantity}  {props.unit}

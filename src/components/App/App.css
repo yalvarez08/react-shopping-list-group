@@ -16,11 +16,12 @@ li {
 
 span.li-btns {
   float: right;
+  
 }
 
 .buy-btn {
   background-color: rgb(85, 150, 247);
-
+  
 }
 
 .remove-btn {

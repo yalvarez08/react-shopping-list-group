@@ -13,9 +13,9 @@ function ShoppingList(props) {
         {props.shoppingList.map(item => (
           
           <Item key={item.id}
-            name={item.name} quantity={item.quantity} unit={item.unit}/> )
-    
-            )}
+            name={item.name} quantity={item.quantity} unit={item.unit}/>)
+
+        )}
       </ul>
     </div>
   );
