@@ -1,9 +1,12 @@
 # React Shopping List
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
 
 ## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
+Created a simple grocery shopping list. User is able to add input in 'item', 'qty', and 'unit' fields, then click 'Save' button to submit the data to server.
 
-Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
+Items are then rendered below as a Shopping List so the user can visually see all items they have on their list. Next to the item is a 'Buy' and 'Remove' button.
+
+
+
+
