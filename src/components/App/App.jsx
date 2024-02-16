@@ -81,6 +81,8 @@ function App() {
             </form>
             {/* <ShoppingList shoppingList={shoppingList} /> */}
             <h2>Shopping List</h2>
+            <p><button className="reset-btn">Reset</button></p>
+            <p><button className="clear-btn">Clear</button></p>   
             <ul>
             {shoppingList.map(item => (
                 <li key={item.id}>{item.name}  {item.quantity}  {item.unit} 
