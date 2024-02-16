@@ -1,34 +1,32 @@
-import {useEffect, useState} from 'react';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-import Header from '../Header/Header.jsx'
+import Header from "../Header/Header.jsx";
 
-import './App.css';
-
+import "./App.css";
+import ShoppingList from "../ShoppingList/ShoppingList.jsx";
 
 function App() {
+  const [shoppingList, setShoppingList] = useState([]);
+  const [newItemName, setNewItemName] = useState("");
+  const [newQuantity, setNewQuantity] = useState("");
+  const [newUnit, setNewUnit] = useState("");
 
-    const [shoppingList, setShoppingList] = useState ([]);
-    const [newItemName, setNewItemName] = useState ('');
-    const [newQuantity, setNewQuantity] = useState ('');
-    const [newUnit, setNewUnit] = useState ('');
-
-
-    const fetchShoppingList = () => {
-        //get request to fetch existing list items
-        axios.get('/api/shopping')
-          .then(response => {
-            console.log('GET request was successful:', response.data);
+  const fetchShoppingList = () => {
+          //get request to fetch existing list items
+       axios.get('/api/shopping')
+       .then(response => {
+           console.log('GET request was successful:', response.data);
             setShoppingList(response.data);
-          })
-          .catch(err => {
+        })
+        .catch(err => {
             console.log('GET error in getting shopping list', err);
-          })
-      }
-      //On load, get list
-      useEffect(
-        fetchShoppingList, []
-      );
+        })
+   }
+        //On load, get list
+        useEffect(
+          fetchShoppingList, []
+        );
 
     const addItem = (event) => {
         event.preventDefault();
@@ -63,36 +61,41 @@ function App() {
     }
 
 
+     
 
-    return (
-        <div className="App">
-            <Header />
-            <main>
-            {/* <AddItemForm addItem={addItem} /> */}
-            <h2>Add an Item</h2>
-            <form onSubmit={addItem}>
-                <label htmlFor="item-input">Item:</label>
-                <input id="item-input" value={newItemName} onChange={e => setNewItemName(e.target.value)} placeholder="item" />
-                <label htmlFor="qty-input">Quantity:</label>
-                <input id="qty-input" value={newQuantity} onChange={e => setNewQuantity(e.target.value)} placeholder="qty" />
-                <label htmlFor="unit-input">Unit:</label>
-                <input id="unit-input" value={newUnit} onChange={e => setNewUnit(e.target.value)} placeholder="unit" />
-                <button type="submit">Save</button>
-            </form>
-            {/* <ShoppingList shoppingList={shoppingList} /> */}
-            <h2>Shopping List</h2>
-            <p><button className="reset-btn">Reset</button></p>
-            <p><button className="clear-btn">Clear</button></p>   
-            <ul>
-            {shoppingList.map(item => (
-                <li key={item.id}>{item.name}  {item.quantity}  {item.unit} 
-                <span className="li-btns"><button className="buy-btn">Buy</button> <button className="remove-btn" onClick={removeItem}>Remove</button></span>
-                </li> 
-            ))}
-            </ul>
-            </main>
-        </div>
-    );
+ return (
+    <div className="App">
+      <Header />
+      <main>
+        <form onSubmit={addItem}>
+          <label htmlFor="item-input">Item:</label>
+          <input
+            id="item-input"
+            value={newItemName}
+            onChange={(e) => setNewItemName(e.target.value)}
+          />
+          <label htmlFor="qty-input">Quantity:</label>
+          <input
+            id="qty-input"
+            value={newQuantity}
+            onChange={(e) => setNewQuantity(e.target.value)}
+          />
+          <label htmlFor="unit-input">Unit:</label>
+          <input
+            id="unit-input"
+            value={newUnit}
+            onChange={(e) => setNewUnit(e.target.value)}
+          />
+          <button type="submit">Save</button>
+        </form>
+       
+          <ShoppingList  shoppingList={shoppingList}/>
+        
+      </main>
+    </div>
+  );
+
+
 }
 
 export default App;

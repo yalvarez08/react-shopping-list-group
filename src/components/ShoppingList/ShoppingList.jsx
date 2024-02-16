@@ -1,14 +1,18 @@
-// import axios from 'axios';
+import axios from "axios";
 
-// function ShoppingList () {
+function ShoppingList({shoppingList}) {
+  return (
+    <div>
+      <ul>
+        {shoppingList.map((item) => (
+          <li key={item.id}>
+            {item.name} {item.quantity} {item.unit}
+            <button>Buy</button> <button>Remove</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
-// return (
-//     <div>
-    
-//     </div>
-// )
-
-// }
-
-
-// export default ShoppingList;
+export default ShoppingList;
