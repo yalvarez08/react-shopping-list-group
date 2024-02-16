@@ -84,7 +84,8 @@ function App() {
             <ul>
             {shoppingList.map(item => (
                 <li key={item.id}>{item.name}  {item.quantity}  {item.unit} 
-                <button className="buy-btn">Buy</button> <button className="remove-btn" onClick={removeItem}>Remove</button></li> 
+                <span className="li-btns"><button className="buy-btn">Buy</button> <button className="remove-btn" onClick={removeItem}>Remove</button></span>
+                </li> 
             ))}
             </ul>
             </main>

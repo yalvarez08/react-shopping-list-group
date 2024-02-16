@@ -6,3 +6,23 @@ main {
 ul {
   list-style-type: none;
 }
+
+li {
+  margin: 1em;
+  padding: 20px;
+  border: solid;
+  border-radius: 10px;
+}
+
+span.li-btns {
+  float: right;
+}
+
+.buy-btn {
+  background-color: rgb(85, 150, 247);
+
+}
+
+.remove-btn {
+  background-color: rgb(246, 91, 91);
+}
