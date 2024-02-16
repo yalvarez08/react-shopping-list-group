@@ -5,12 +5,14 @@ import Header from "../Header/Header.jsx";
 
 import "./App.css";
 import ShoppingList from "../ShoppingList/ShoppingList.jsx";
+import ShoppingForm from "../ShoppingForm/ShoppingForm.jsx";
+
 
 function App() {
   const [shoppingList, setShoppingList] = useState([]);
-  const [newItemName, setNewItemName] = useState("");
-  const [newQuantity, setNewQuantity] = useState("");
-  const [newUnit, setNewUnit] = useState("");
+  const [newItemName, setNewItemName] = useState('');
+  const [newQuantity, setNewQuantity] = useState('');
+  const [newUnit, setNewUnit] = useState('');
 
   const fetchShoppingList = () => {
           //get request to fetch existing list items
@@ -28,13 +30,14 @@ function App() {
           fetchShoppingList, []
         );
 
-    const addItem = (event) => {
-        event.preventDefault();
+    const addItem = (itemNameInput, quantityInput, unitInput) => {
+        //event.preventDefault();
+        console.log('new item is:', itemNameInput, quantityInput, unitInput);
         //post request to add new item to list
         axios ({
             method: 'POST',
             url: '/api/shopping',
-            data: {name: newItemName, quantity: newQuantity, unit: newUnit}
+            data: {name: itemNameInput, quantity: quantityInput, unit: unitInput}
         })
         .then(response => {
             console.log('Item added; POST was successful!', response);
@@ -65,29 +68,8 @@ function App() {
     <div className="App">
       <Header />
       <main>
-        <form onSubmit={addItem}>
-          <label htmlFor="item-input">Item:</label>
-          <input
-            id="item-input"
-            value={newItemName}
-            onChange={(e) => setNewItemName(e.target.value)}
-          />
-          <label htmlFor="qty-input">Quantity:</label>
-          <input
-            id="qty-input"
-            value={newQuantity}
-            onChange={(e) => setNewQuantity(e.target.value)}
-          />
-          <label htmlFor="unit-input">Unit:</label>
-          <input
-            id="unit-input"
-            value={newUnit}
-            onChange={(e) => setNewUnit(e.target.value)}
-          />
-          <button type="submit">Save</button>
-        </form>
-       
-          <ShoppingList  shoppingList={shoppingList}/>
+        <ShoppingForm addItem={addItem} />
+        <ShoppingList shoppingList={shoppingList}/>
         
       </main>
     </div>
